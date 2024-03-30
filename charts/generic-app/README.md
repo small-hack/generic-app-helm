@@ -1,8 +1,15 @@
 # generic-app
 
-![Version: 0.1.0](https://img.shields.io/badge/Version-0.1.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.16.0](https://img.shields.io/badge/AppVersion-1.16.0-informational?style=flat-square)
+![Version: 0.1.1](https://img.shields.io/badge/Version-0.1.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.16.0](https://img.shields.io/badge/AppVersion-1.16.0-informational?style=flat-square)
 
 A generic Helm chart for Kubernetes for when you have a docker container and don't want to write a helm chart
+
+## Maintainers
+
+| Name | Email | Url |
+| ---- | ------ | --- |
+| JesseBot |  | <https://github.com/jessebot> |
+| cloudymax |  | <https://github.com/cloudymax> |
 
 ## Values
 
