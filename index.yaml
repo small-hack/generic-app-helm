@@ -1,0 +1,20 @@
+apiVersion: v1
+entries:
+  generic-app:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2024-03-30T13:03:22.453797101Z"
+    description: A generic Helm chart for Kubernetes for when you have a docker container
+      and don't want to write a helm chart
+    digest: 61aa5479721397bd788acc76115c9a9f9b29a7e10927536f3112f4c5cbdce790
+    maintainers:
+    - name: JesseBot
+      url: https://github.com/jessebot
+    - name: cloudymax
+      url: https://github.com/cloudymax
+    name: generic-app
+    type: application
+    urls:
+    - https://github.com/jessebot/generic-app-helm/releases/download/generic-app-0.1.1/generic-app-0.1.1.tgz
+    version: 0.1.1
+generated: "2024-03-30T13:03:22.453825745Z"
