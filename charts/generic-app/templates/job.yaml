@@ -1,48 +1,46 @@
-{{- if .Values.deployment.enabled }}
+{{- if .Values.job.enabled }}
 apiVersion: apps/v1
-kind: Deployment
+kind: Job
 metadata:
   name: {{ include "generic-app.fullname" . }}
   labels:
     {{- include "generic-app.labels" . | nindent 4 }}
 spec:
-  {{- if not .Values.deployment.autoscaling.enabled }}
-  replicas: {{ .Values.deployment.replicaCount }}
-  {{- end }}
   selector:
     matchLabels:
       {{- include "generic-app.selectorLabels" . | nindent 6 }}
   template:
     metadata:
-      {{- with .Values.deployment.podAnnotations }}
+      {{- with .Values.job.podAnnotations }}
       annotations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
         {{- include "generic-app.labels" . | nindent 8 }}
-        {{- with .Values.deployment.podLabels }}
+        {{- with .Values.job.podLabels }}
         {{- toYaml . | nindent 8 }}
         {{- end }}
     spec:
-      {{- with .Values.deployment.imagePullSecrets }}
+      restartPolicy: {{ .Values.job.restartPolicy }}
+      {{- with .Values.job.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       serviceAccountName: {{ include "generic-app.serviceAccountName" . }}
       securityContext:
-        {{- toYaml .Values.deployment.podSecurityContext | nindent 8 }}
+        {{- toYaml .Values.job.podSecurityContext | nindent 8 }}
 
-      {{- if .Values.deployment.initContainers }}
+      {{- if .Values.job.initContainers }}
       initContainers:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       containers:
         - name: {{ .Chart.Name }}
           securityContext:
-            {{- toYaml .Values.deployment.securityContext | nindent 12 }}
-          image: "{{ .Values.deployment.image.registry }}/{{ .Values.deployment.image.repository }}:{{ .Values.deployment.image.tag | default .Chart.AppVersion }}"
-          imagePullPolicy: {{ .Values.deployment.image.pullPolicy }}
-          {{- with .Values.deployment.containerCommand }}
+            {{- toYaml .Values.job.securityContext | nindent 12 }}
+          image: "{{ .Values.job.image.registry }}/{{ .Values.job.image.repository }}:{{ .Values.job.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.job.image.pullPolicy }}
+          {{- with .Values.job.containerCommand }}
           command: 
             {{- toYaml . | nindent 12}}
           {{- end }}
@@ -50,41 +48,41 @@ spec:
             - name: http
               containerPort: {{ .Values.service.port }}
               protocol: TCP
-          {{- if .Values.deployment.livenessProbe.enabled }}
+          {{- if .Values.job.livenessProbe.enabled }}
           livenessProbe:
-            {{- toYaml .Values.deployment.livenessProbe | nindent 12 }}
+            {{- toYaml .Values.job.livenessProbe | nindent 12 }}
           {{- end }}
-          {{- if .Values.deployment.readinessProbe.enabled }}
+          {{- if .Values.job.readinessProbe.enabled }}
           readinessProbe:
-            {{- toYaml .Values.deployment.readinessProbe | nindent 12 }}
+            {{- toYaml .Values.job.readinessProbe | nindent 12 }}
           {{- end }}
           resources:
-            {{- toYaml .Values.deployment.resources | nindent 12 }}
-          {{- with .Values.deployment.volumeMounts }}
+            {{- toYaml .Values.job.resources | nindent 12 }}
+          {{- with .Values.job.volumeMounts }}
           volumeMounts:
             {{- toYaml . | nindent 12 }}
           {{- end }}
-          {{- with .Values.deployment.env }}
+          {{- with .Values.job.env }}
           env:
             {{- toYaml . | nindent 12 }}
           {{- end }}
-          {{- with .Values.deployment.envFrom }}
+          {{- with .Values.job.envFrom }}
           envFrom:
             {{- toYaml . | nindent 12 }}
           {{- end }}
-      {{- with .Values.deployment.volumes }}
+      {{- with .Values.job.volumes }}
       volumes:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- with .Values.deployment.nodeSelector }}
+      {{- with .Values.job.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- with .Values.deployment.affinity }}
+      {{- with .Values.job.affinity }}
       affinity:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- with .Values.deployment.tolerations }}
+      {{- with .Values.job.tolerations }}
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}

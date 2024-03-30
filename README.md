@@ -14,8 +14,10 @@ Because sometimes you don't want to write a whole helm chart for a simple app. T
 
 ## How?
 
-Because this chart is basically just the stock helm chart, you can use it like any other. It defaults to just deploying the nginx container, but you can change that. In fact, you can change basically everything. We even let you disable the default service, and have an option to deploy a cronjob/job instead of (or in addition to) a deployment.
+Because this chart is basically just the stock helm chart, you can use it like any other. It defaults to just deploying the nginx container, but you can change that. In fact, you can change basically everything. We even let you disable the default service, and have an option to deploy a Job instead of (or in addition to) a Deployment.
 
+
+### Changing the default deployment
 
 Here's how to get started using your own docker container
 
@@ -30,18 +32,35 @@ deployment:
     tag: "latest"
 ```
 
+#### Disabling the deployment
+
+Sometimes you just need a job...
+
+```yaml
+deployment:
+  enabled: false
+```
+
+
+## Enabling a job
+
+```yaml
+job:
+  enabled: true
+  image:
+    # -- provide this only if you're not hosting on hub.docker.com (docker.io)
+    registry: ""
+    # -- this can be set to any docker repo
+    repository: "mydockercontainer"
+    # -- docker image tag to pull
+    tag: "latest"
+```
+
 ### Enabling the ingress
 
 ```yaml
 ingress:
   enabled: true
-```
-
-### Disabling the deployment
-
-```yaml
-deployment:
-  enabled: false
 ```
 
 ### Disabling the service
