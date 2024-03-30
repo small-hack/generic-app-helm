@@ -72,6 +72,10 @@ service:
   enabled: false
 ```
 
+## Tips
+
+Want to deploy on Argo CD? Checkout our [example ApplicationSet](https://github.com/small-hack/argocd-apps/tree/main/generic-app).
+
 ## Status
 
 Submit any PRs you may have and please feel free to submit issues if you have a generic feature :P
