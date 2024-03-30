@@ -1,5 +1,6 @@
 # Generic App Helm Chart
 <a href="https://github.com/small-hack/generic-app-helm/releases"><img src="https://img.shields.io/github/v/release/small-hack/generic-app-helm?style=plastic&labelColor=blue&color=green&logo=GitHub&logoColor=white"></a>
+
 This is a helm chart for a generic Kubernetes Application.
 
 
